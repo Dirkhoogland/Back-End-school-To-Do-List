@@ -14,6 +14,8 @@ namespace Back_End_school_To_Do_List.Pages
     {
         private readonly ILogger<IndexModel> _logger;
 
+        public string Lijst { get; private set; }
+
         public IndexModel(ILogger<IndexModel> logger)
         {
             _logger = logger;
@@ -21,48 +23,22 @@ namespace Back_End_school_To_Do_List.Pages
 
         public void OnGet()
         {
+            Connect();
         }
 
         public void Connect()
         {
-            string con = "Data Source = LAPTOP - 6OVEOOKP; Integrated Security = True";
+            string con = "Data Source = LAPTOP-6OVEOOKP; Initial Catalog = School; Integrated Security = True";
             SqlConnection conn = new SqlConnection(con);
             conn.Open();
         }
 
-        //public static string executeSql(string query, string db, string action)
-        //{
-        //    string returnValue = "";
 
-        //    string con = "Data Source = LAPTOP - 6OVEOOKP; Integrated Security = True";
-
-        //    SqlConnection conn = new SqlConnection(con);
-        //    SqlCommand commandsql = new SqlCommand(query, conn);
-        //    conn.Open();
-
-        //    if (action == "SELECT")
-        //    {
-        //        try
-        //        {
-        //            returnValue = commandsql.ExecuteScalar().ToString();
-        //        }
-        //        catch (NullReferenceException e)
-        //        {
-        //            returnValue = "NULL";
-        //        }
-
-
-        //    }
-        //    else
-        //    {
-        //        commandsql.ExecuteNonQuery();
-
-        //    }
-        //    conn.Close();
-
-
-        //    return returnValue;
-        //}
+        public void userdata()
+        {
+           var lijst = Request.Form[Lijst];
+           Console.WriteLine(lijst);
+        }
 
 
 
