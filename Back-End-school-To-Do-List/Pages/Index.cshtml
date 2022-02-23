@@ -1,0 +1,28 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="center-container">
+
+    <div class = "Input-user">
+
+        <form asp-action = "Input()" method = "post">
+            <label>Lijst</label>
+            <input type = "text" name = "Lijst" value = "" />
+            <label>Beschrijving</label>
+           <input type = "text" name = "Beschrijving" value = "" />
+           <label>Tijd (minuten)</label>
+           <input type = "text" name = "Duur" value = ""/>
+           <label>Status</label>
+           <input type = "text" name = "Status" value = ""/>
+
+            <submit type = "Button" value = "submit">submit</submit>
+
+
+        </form>
+
+    </div>
+
+</div>
