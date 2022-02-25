@@ -8,17 +8,19 @@
 
     <div class = "Input-user">
 
-        <form  method = "post">
-            <label>Lijst</label>
-            <input type = "text" name = "Lijst" value = "" />
-            <label>Beschrijving</label>
-           <input type = "text" name = "Beschrijving" value = "" />
+        <form method = "post" asp-action = "UserData()"   >
+           <label>Lijst</label>
+           <input type = "text" name = "Lijst" value = "test" id = "Lijst"/>
+           <label>Naam</label>
+           <input type = "text" name = "Naam" value = "" id = "Naam" />
+           <label>Beschrijving</label>
+           <input type = "text" name = "Beschrijving" value = "" id = "Beschrijving" />
            <label>Tijd (minuten)</label>
-           <input type = "text" name = "Duur" value = ""/>
+           <input type = "text" name = "Duur" value = "" id = "Duur" />
            <label>Status</label>
-           <input type = "text" name = "Status" value = ""/>
+           <input type = "text" name = "Status" value = "" id = "Status" />
 
-            <submit type = "Button" value = "submit" onclick = "userinput()">submit</submit>
+            <submit type = "Button" value = "submit"   >submit</submit>
 
         </form>
 

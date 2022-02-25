@@ -14,16 +14,28 @@ namespace Back_End_school_To_Do_List.Pages
     {
         private readonly ILogger<IndexModel> _logger;
 
-        public string Lijst { get; private set; }
-
         public IndexModel(ILogger<IndexModel> logger)
         {
             _logger = logger;
         }
+        [BindProperty]
+        public string Lijst { get; private set; }
+        public string Naam { get; private set; }
+        public string Beschrijving { get; private set; }
 
+        public string Duur { get; private set; }
+
+        public string Status { get; private set; }
         public void OnGet()
         {
-            Connect();
+            Console.WriteLine(Lijst);
+
+        }
+
+        public void OnPost()
+        {
+            
+            Console.WriteLine(Lijst);
         }
 
         public void Connect()
@@ -34,12 +46,23 @@ namespace Back_End_school_To_Do_List.Pages
         }
 
 
-        public void userdata()
+        public void UserdDta()
         {
-           var lijst = Request.Form[Lijst];
-           Console.WriteLine(lijst);
+
+            Connect();
+
+           Console.WriteLine(Lijst);
+
         }
 
+
+        public void Insert()
+        {
+            string con = "Data Source = LAPTOP-6OVEOOKP; Initial Catalog = School; Integrated Security = True";
+            SqlConnection conn = new SqlConnection(con);
+            conn.Open();
+            SqlCommand cmd = new SqlCommand();
+        }
 
 
     }
