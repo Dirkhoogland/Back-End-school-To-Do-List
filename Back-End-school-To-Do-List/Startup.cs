@@ -1,5 +1,7 @@
+using Back_End_school_To_Do_List.Models.Database;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -22,6 +24,8 @@ namespace Back_End_school_To_Do_List
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            var connectionString = Configuration["ConnectionString"];
+            services.AddDbContextPool<SchoolContext>(options => options.UseSqlServer(connectionString));
             services.AddRazorPages();
         }
 
