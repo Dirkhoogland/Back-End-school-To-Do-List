@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Back_End_school_To_Do_List.Pages
 {
-
+    [BindProperties(SupportsGet = true)]
     public class IndexModel : PageModel
     {
         private readonly ILogger<IndexModel> _logger;
@@ -22,9 +22,10 @@ namespace Back_End_school_To_Do_List.Pages
         {
             _logger = logger;
             _context = context;
+            Naaminput = "testnaam";
         }
-        public string Naaminput { get; set; }
-
+        public string Naaminput  { get; set; }
+        
         public string Beschrijvinginput { get; set; }
 
         public int Duurinput { get; set; }
