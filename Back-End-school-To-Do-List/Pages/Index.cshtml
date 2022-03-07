@@ -6,25 +6,87 @@
 
 <div class="center-container">
 
-    <div class = "Input-user">
+    <div class = "Dataview">
+        
+        <datalist>
 
-        <form method = "post" asp-action = "UserData" >
 
-           <label>Lijst</label>
-           <input type = "text" name = "Lijst" value = "test" id = "Lijst"/>
-           <label>Naam</label>
-           <input type = "text" name = "Naam" value = "" id = "Naam" />
-           <label>Beschrijving</label>
-           <input type = "text" name = "Beschrijving" value = "" id = "Beschrijving" />
-           <label>Tijd (minuten)</label>
-           <input type = "text" name = "Duur" value = "" id = "Duur" />
-           <label>Status</label>
-           <input type = "text" name = "Status" value = "" id = "Status" />
 
-           <submit type = "Button" value = "submit"   >submit</submit>
-
-        </form>
+        </datalist>
 
     </div>
 
+
+
+    <div class = "Input-user">
+            @using (Html.BeginForm("OnPost", "IndexModel", FormMethod.Post))
+    {
+        <table cellpadding="0" cellspacing="0">
+            <tr>
+                <th colspan="2" align="center">Planning details</th>
+            </tr>
+            <tr>
+                <td>Naam: </td>
+                <td>
+                    @Html.TextBoxFor(m => m.Naaminput)
+                </td>
+            </tr>
+            <tr>
+                <td>Beschrijving </td>
+                <td>
+                    @Html.TextBoxFor(m => m.Beschrijvinginput)
+                </td>
+            </tr>
+            <tr>
+                <td>Status </td>
+                <td>
+                    @Html.DropDownListFor(m => m.Statusinput, new List<SelectListItem>
+                   { new SelectListItem{Text="Klaar", Value="Klaar"},
+                     new SelectListItem{Text="Bezig", Value="Bezig"}}, "select")
+                </td>
+            </tr>
+            <tr>
+                <td>Duur</td>
+                <td>
+                    @Html.TextBoxFor(m => m.Duurinput)
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><input type="submit" value="Submit"/></td>
+            </tr>
+        </table>
+    }
+        
+    </div>
+
 </div>
+@*<form method = "post" asp-controller = "IndexModel"  >
+           <div>
+            <label for = "Naam">Naam</label>
+            <input type = "text" name = "Naam" class = "input" asp-for = "Naaminput" />
+           </div>
+
+           <div>
+            <label for = "Beschrijving">Beschrijving</label>
+            <input type = "text" name = "Beschrijving"    class = "input" asp-for = "Beschrijvinginput"/>
+           </div>
+
+           <div>
+            <label for = "Duur">Tijd (minuten)</label>
+            <input type = "text" name = "Duur"    class = "input" asp-for = "Duurinput"/>
+           </div>
+
+           <div>
+            <label>Status</label>
+            </div>
+            <div>
+            <label for = "Bezig">Bezig</label>
+            <input type = "radio" name = "Bezig"  class = "input-radio" asp-for = "Beziginput" value = "Bezig" />
+            <label for = "Klaar">Klaar</label>
+            <input type = "radio" name = "Klaar"  class = "input-radio" asp-for = "Klaarinput" value = "Klaar"/>
+           </div>
+
+           <submit type = "Button" value = "Submit" name = "Submit"  >submit</submit>
+           
+        </form>*@

@@ -12,6 +12,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Back_End_school_To_Do_List.Pages
 {
+
     public class IndexModel : PageModel
     {
         private readonly ILogger<IndexModel> _logger;
@@ -22,14 +23,13 @@ namespace Back_End_school_To_Do_List.Pages
             _logger = logger;
             _context = context;
         }
-        [BindProperty]
-        public string Lijst { get; private set; }
-        public string Naam { get; private set; }
-        public string Beschrijving { get; private set; }
+        public string Naaminput { get; set; }
 
-        public string Duur { get; private set; }
+        public string Beschrijvinginput { get; set; }
 
-        public string Status { get; private set; }
+        public int Duurinput { get; set; }
+
+        public string Statusinput { get; set; }
         public async Task OnGet()
         {
             // _context.Requirements.Include(i => i.)
@@ -39,8 +39,8 @@ namespace Back_End_school_To_Do_List.Pages
             {
             }
 
-            var data = await _context.Requirements.Where(i => i.Duur == 10).ToListAsync();
-
+            var Bezig = await _context.Requirements.Where(i => i.Status == "Bezig").ToListAsync();
+            var klaar = await _context.Requirements.Where(i => i.Status == "Klaar").ToListAsync();
             var x = true;
 
         }
@@ -49,46 +49,23 @@ namespace Back_End_school_To_Do_List.Pages
         {
             _context.Requirements.Add(new Requirements()
             {
-                 Id = 0,
-                  Naam = "Sander",
-                Beschrijving = "Test3",
-                    Duur = 14
-                    
+                Id = 0,
+                Lijst = "Requirements",
+                Naam = Naaminput,
+                Beschrijving = Beschrijvinginput,
+                Duur = Duurinput,
+                Status = Statusinput
+
             });
 
             if (_context.SaveChanges() > 0)
             {
-                //return OkResult();
+                // return OkResult();
             }
 
-
-            Console.WriteLine(Lijst);
         }
+
         
-        public void Connect()
-        {
-            string con = "Data Source = LAPTOP-6OVEOOKP; Initial Catalog = School; Integrated Security = True";
-            SqlConnection conn = new SqlConnection(con);
-            conn.Open();
-        }
-
-
-        public void UserdData()
-        {
-
-            Connect();
-
-
-        }
-
-
-        public void Insert()
-        {
-            string con = "Data Source = LAPTOP-6OVEOOKP; Initial Catalog = School; Integrated Security = True";
-            SqlConnection conn = new SqlConnection(con);
-            conn.Open();
-            SqlCommand cmd = new SqlCommand();
-        }
 
 
     }
