@@ -3,27 +3,28 @@
 @{
     ViewData["Title"] = "Home page";
 }
-
 <div class="center-container">
 
     <div class = "Dataview">
-        
-        <datalist>
+        <button onclick = Insertshow(); id = "Insertbutton" >Insert</button>
 
+        @{
+            int i = 0;
+            
 
-
-        </datalist>
-
+    }
     </div>
 
 
 
-    <div class = "Input-user">
+    <div class = "Inputuserinsert">
+
+        <div id = "Inputuserinserttext">
             @using (Html.BeginForm("OnPost", "IndexModel", FormMethod.Post))
     {
         <table cellpadding="0" cellspacing="0">
             <tr>
-                <th colspan="2" align="center">Planning details</th>
+                <th colspan="2" align="center">Planning details toevoeggen </th>
             </tr>
             <tr>
                 <td>Naam: </td>
@@ -56,8 +57,11 @@
                 <td><input type="submit" value="Submit"/></td>
             </tr>
         </table>
+         string insert = "true";
+
+         
     }
-        
+      </div>  
     </div>
 
 </div>

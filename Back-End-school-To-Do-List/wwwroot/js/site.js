@@ -1,4 +1,8 @@
-﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
+﻿var Insertbutton = document.getElementById("Insertbutton");
+var Inputuserinserttext = document.getElementById("Inputuserinserttext");
+var Inputuserdeletetext = document.getElementById("Inputuserdeletetext");
+var Inputuserupdatetext = document.getElementById("Inputuserupdatetext");
 
-// Write your JavaScript code.
+function Insertshow() {
+    Inputuserinserttext.style.visibility= "visible"
+}
