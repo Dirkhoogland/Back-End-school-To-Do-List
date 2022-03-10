@@ -33,7 +33,12 @@ namespace Back_End_school_To_Do_List.Pages
         public int BezigCount { get; set; }
         public int KlaarCount { get; set; }
 
-        public string insert { get; set; }
+        public bool Insert { get; set; }
+
+        public bool Delete { get; set; }
+
+        public bool Update { get; set; }
+
         public async Task OnGet()
         {
             // _context.Requirements.Include(i => i.)
@@ -45,20 +50,20 @@ namespace Back_End_school_To_Do_List.Pages
 
             var Bezig = await _context.Requirements.Where(i => i.Status == "Bezig").ToListAsync();
             var Klaar = await _context.Requirements.Where(i => i.Status == "Klaar").ToListAsync();
-            var x = true;
 
 
-            int BezigCount = Bezig.Count();
-            int KlaarCount = Klaar.Count();
+
+             BezigCount = Bezig.Count();
+             KlaarCount = Klaar.Count();
 
 
         }
-
+        
         public void OnPost()
         {
 
-            if (insert == "true")
-            {
+
+            if (Insert == true) {
                 _context.Requirements.Add(new Requirements()
                 {
                     Id = 0,
@@ -70,10 +75,31 @@ namespace Back_End_school_To_Do_List.Pages
 
                 });
             }
+            if (Delete == true)
+            {
+                _context.Requirements.Remove(new Requirements()
+                {
+
+                    Naam = Naaminput,
+                    Beschrijving = Beschrijvinginput,
+                    Duur = Duurinput,
+                    Status = Statusinput
+
+                });
+            }
+            //if (Update == true)
+            //{
+            //    _context.Requirements.Update(new Requirements()
+            //    {
+            //        Naam = Naaminput,   
+                    
+            //    });
+            //}
+
 
             if (_context.SaveChanges() > 0)
             {
-                // return OkResult();
+                _context.SaveChanges();
             }
 
         }

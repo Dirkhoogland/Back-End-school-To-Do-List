@@ -2,17 +2,23 @@
 @model IndexModel
 @{
     ViewData["Title"] = "Home page";
+
 }
 <div class="center-container">
 
     <div class = "Dataview">
-        <button onclick = Insertshow(); id = "Insertbutton" >Insert</button>
+        <button onclick = Insertshow();   id = "Insertbutton"  >Insert</button>
+        @*        <button onclick = Deleteshow();   id = "Insertbutton"  >Delete</button>*@
+        @*        <button onclick = Updateshow();   id = "Insertbutton"  >Update</button>*@
 
-        @{
-            int i = 0;
-            
+        @using Back_End_school_To_Do_List()
+        { 
+            for (int i = 0; i < BezigCount; i++)
+            {
+                
+            }
+        }
 
-    }
     </div>
 
 
@@ -54,14 +60,39 @@
             </tr>
             <tr>
                 <td></td>
-                <td><input type="submit" value="Submit"/></td>
+                <td><input type="submit" value="SubmitInsert" runat = "server" id = "Insertsub" /></td>
+               
             </tr>
         </table>
-         string insert = "true";
+
 
          
     }
-      </div>  
+      </div> 
+@*        <div id = "InputuserDeletetext">
+            @using (Html.BeginForm("OnPost", "IndexModel", FormMethod.Post))
+    {
+        <table cellpadding="0" cellspacing="0">
+            <tr>
+                <th colspan="2" align="center">Planning details verwijderen </th>
+            </tr>
+            <tr>
+                <td>Naam: </td>
+                <td>
+                    @Html.TextBoxFor(m => m.Naaminput)
+                </td>
+                <td><input type="submit" value="SubmitDelete" runat = "server" id = "deletesub"/></td>
+            </tr>
+        </table>
+
+
+         
+    }
+      </div> *@
     </div>
 
+      
 </div>
+
+
+   

@@ -84,3 +84,6 @@ body {
 #Inputuserinserttext{
     visibility:hidden;
 }
+#InputuserDeletetext {
+    visibility: hidden;
+}
