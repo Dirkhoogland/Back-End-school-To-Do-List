@@ -13,6 +13,7 @@ using Microsoft.EntityFrameworkCore;
 namespace Back_End_school_To_Do_List.Pages
 {
     [BindProperties(SupportsGet = true)]
+    
     public class IndexModel : PageModel
     {
         private readonly ILogger<IndexModel> _logger;
@@ -33,11 +34,17 @@ namespace Back_End_school_To_Do_List.Pages
         public int BezigCount { get; set; }
         public int KlaarCount { get; set; }
 
+        public List<Requirements> Klaar { get; set; }
+
+        public List<Requirements> Bezig { get; set; }
+
         public bool Insert { get; set; }
 
         public bool Delete { get; set; }
 
         public bool Update { get; set; }
+
+        public int Idinput { get; set; }
 
         public async Task OnGet()
         {
@@ -48,8 +55,8 @@ namespace Back_End_school_To_Do_List.Pages
             {
             }
 
-            var Bezig = await _context.Requirements.Where(i => i.Status == "Bezig").ToListAsync();
-            var Klaar = await _context.Requirements.Where(i => i.Status == "Klaar").ToListAsync();
+            Bezig = await _context.Requirements.Where(i => i.Status == "Bezig").ToListAsync();
+            Klaar = await _context.Requirements.Where(i => i.Status == "Klaar").ToListAsync();
 
 
 
@@ -80,12 +87,9 @@ namespace Back_End_school_To_Do_List.Pages
                 _context.Requirements.Remove(new Requirements()
                 {
 
-                    Naam = Naaminput,
-                    Beschrijving = Beschrijvinginput,
-                    Duur = Duurinput,
-                    Status = Statusinput
+                    Id = Idinput
 
-                });
+                }); 
             }
             //if (Update == true)
             //{

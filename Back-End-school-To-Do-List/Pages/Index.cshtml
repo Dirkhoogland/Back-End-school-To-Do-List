@@ -8,12 +8,12 @@
 
     <div class = "Dataview">
         <button onclick = Insertshow();   id = "Insertbutton"  >Insert</button>
-        @*        <button onclick = Deleteshow();   id = "Insertbutton"  >Delete</button>*@
+                <button onclick = Deleteshow();   id = "Insertbutton"  >Delete</button>
         @*        <button onclick = Updateshow();   id = "Insertbutton"  >Update</button>*@
+        
+        @{
 
-        @using Back_End_school_To_Do_List()
-        { 
-            for (int i = 0; i < BezigCount; i++)
+            for (int i = 0; i < Model.BezigCount; i++  )
             {
                 
             }
@@ -64,12 +64,7 @@
                
             </tr>
         </table>
-
-
-         
-    }
-      </div> 
-@*        <div id = "InputuserDeletetext">
+     <div id = "InputuserDeletetext">
             @using (Html.BeginForm("OnPost", "IndexModel", FormMethod.Post))
     {
         <table cellpadding="0" cellspacing="0">
@@ -79,20 +74,52 @@
             <tr>
                 <td>Naam: </td>
                 <td>
-                    @Html.TextBoxFor(m => m.Naaminput)
+                    @Html.TextBoxFor(m => m.Idinput)
                 </td>
                 <td><input type="submit" value="SubmitDelete" runat = "server" id = "deletesub"/></td>
             </tr>
-        </table>
-
+        </table>    
+    }
+      </div> 
 
          
     }
-      </div> *@
+      </div> 
     </div>
 
       
 </div>
+        <div class = "Bezightml">
+        @{ 
+        <h2>Bezig</h2>
+        foreach (var item in Model.Bezig)
+        {
+            <p>Naam @{@item.Naam}</p>
+            <p>Beschrijving@{@item.Beschrijving}</p>
+            <p>Duur @{@item.Duur}</p>
+            <p>Status @{@item.Status}</p>
+        }
+
+        }
+        </div>
+        <div class = "Klaarhtml">
+        @{
+            <h2>Klaar</h2>
+            foreach (var item in Model.Klaar)
+            {
+                <p>Naam @{@item.Naam}</p>
+                <p>Beschrijving@{@item.Beschrijving}</p>
+                <p>Duur @{@item.Duur}</p>
+                <p>Status @{@item.Status}</p>
+                <P>Id @{@item.Id}</P>                     
+            }
+        }
+        </div>
+
+
+
+
+
 
 
    
