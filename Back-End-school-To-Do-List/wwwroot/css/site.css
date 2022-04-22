@@ -87,3 +87,6 @@ body {
 #InputuserDeletetext {
     visibility: hidden;
 }
+#InputuserUpdatetext {
+    visibility: hidden;
+}

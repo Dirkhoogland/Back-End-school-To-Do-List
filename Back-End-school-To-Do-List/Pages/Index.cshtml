@@ -8,8 +8,8 @@
 
     <div class = "Dataview">
         <button onclick = Insertshow();   id = "Insertbutton"  >Insert</button>
-                <button onclick = Deleteshow();   id = "Insertbutton"  >Delete</button>
-        @*        <button onclick = Updateshow();   id = "Insertbutton"  >Update</button>*@
+        <button onclick = Deleteshow();   id = "Insertbutton"  >Delete</button>
+        <button onclick = Updateshow();   id = "Insertbutton"  >Update</button>
         
         @{
 
@@ -26,11 +26,11 @@
     <div class = "Inputuserinsert">
 
         <div id = "Inputuserinserttext">
-            @using (Html.BeginForm("OnPost", "IndexModel", FormMethod.Post))
+            @using (Html.BeginForm("OnPost", "IndexModel", new { Insert = true }, FormMethod.Post))
     {
         <table cellpadding="0" cellspacing="0">
             <tr>
-                <th colspan="2" align="center">Planning details toevoeggen </th>
+                <th colspan="2" align="center">Planning details toevoeggen</th>
             </tr>
             <tr>
                 <td>Naam: </td>
@@ -65,14 +65,14 @@
             </tr>
         </table>
      <div id = "InputuserDeletetext">
-            @using (Html.BeginForm("OnPost", "IndexModel", FormMethod.Post))
+            @using (Html.BeginForm("OnPost", "IndexModel", new { Delete = true }, FormMethod.Post))
     {
         <table cellpadding="0" cellspacing="0">
             <tr>
                 <th colspan="2" align="center">Planning details verwijderen </th>
             </tr>
             <tr>
-                <td>Naam: </td>
+                <td>Id: </td>
                 <td>
                     @Html.TextBoxFor(m => m.Idinput)
                 </td>
@@ -85,8 +85,51 @@
          
     }
       </div> 
-    </div>
-
+ 
+ <div id = "InputuserUpdatetext">
+     @using (Html.BeginForm("OnPost","IndexModel", new { Update = true },FormMethod.Post))
+     {
+             <table cellpadding="0" cellspacing="0">
+            <tr>
+                <th colspan="2" align="center">Planning details Update </th>
+            </tr>
+            <tr>
+                <td>Id: </td>
+                <td>
+                    @Html.TextBoxFor(m => m.Idinput)
+                </td>
+                <td>
+                    Naam: 
+                </td>
+                <td>
+                    @Html.TextBoxFor(m => m.Naaminput)
+                </td>
+            </tr>
+            <tr>
+                <td>Beschrijving </td>
+                <td>
+                    @Html.TextBoxFor(m => m.Beschrijvinginput)
+                </td>
+            </tr>
+            <tr>
+                <td>Status </td>
+                <td>
+                    @Html.DropDownListFor(m => m.Statusinput, new List<SelectListItem>
+                   { new SelectListItem{Text="Klaar", Value="Klaar"},
+                     new SelectListItem{Text="Bezig", Value="Bezig"}}, "select")
+                </td>
+            </tr>
+            <tr>
+                <td>Duur</td>
+                <td>
+                    @Html.TextBoxFor(m => m.Duurinput)
+                </td>
+                <td><input type="submit" value="SubmitUpdate" runat = "server" id = "updatesub"/></td>
+            </tr>
+        </table>    
+     }
+        </div>
+ </div>
       
 </div>
         <div class = "Bezightml">
@@ -98,6 +141,8 @@
             <p>Beschrijving@{@item.Beschrijving}</p>
             <p>Duur @{@item.Duur}</p>
             <p>Status @{@item.Status}</p>
+            <p>Id @{@item.Id;}</p>
+            <p>-------------------</p>
         }
 
         }
@@ -111,7 +156,8 @@
                 <p>Beschrijving@{@item.Beschrijving}</p>
                 <p>Duur @{@item.Duur}</p>
                 <p>Status @{@item.Status}</p>
-                <P>Id @{@item.Id}</P>                     
+                <P>Id @{@item.Id}</P>  
+                <p>-------------------</p>
             }
         }
         </div>

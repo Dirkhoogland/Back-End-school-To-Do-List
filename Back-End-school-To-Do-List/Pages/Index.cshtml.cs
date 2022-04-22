@@ -48,6 +48,11 @@ namespace Back_End_school_To_Do_List.Pages
 
         public async Task OnGet()
         {
+            await LoadData();
+        }
+
+        private async Task LoadData()
+        {
             // _context.Requirements.Include(i => i.)
 
             var item = await _context.Requirements.FirstOrDefaultAsync(i => i.Status == "Bezig");
@@ -60,56 +65,68 @@ namespace Back_End_school_To_Do_List.Pages
 
 
 
-             BezigCount = Bezig.Count();
-             KlaarCount = Klaar.Count();
-
-
+            BezigCount = Bezig.Count();
+            KlaarCount = Klaar.Count();
         }
-        
-        public void OnPost()
+
+        public async Task OnPost()
         {
 
-
-            if (Insert == true) {
-                _context.Requirements.Add(new Requirements()
-                {
-                    Id = 0,
-                    Lijst = "Requirements",
-                    Naam = Naaminput,
-                    Beschrijving = Beschrijvinginput,
-                    Duur = Duurinput,
-                    Status = Statusinput
-
-                });
-            }
-            if (Delete == true)
+            try
             {
-                _context.Requirements.Remove(new Requirements()
+                if (Insert == true)
                 {
+                    _context.Requirements.Add(new Requirements()
+                    {
+                        Id = 0,
+                        Lijst = "Requirements",
+                        Naam = Naaminput,
+                        Beschrijving = Beschrijvinginput,
+                        Duur = Duurinput,
+                        Status = Statusinput
 
-                    Id = Idinput
+                    });
+                }
+                if (Delete == true)
+                {
+                    _context.Requirements.Remove(new Requirements()
+                    {
 
-                }); 
-            }
-            //if (Update == true)
-            //{
-            //    _context.Requirements.Update(new Requirements()
-            //    {
-            //        Naam = Naaminput,   
-                    
-            //    });
-            //}
+                        Id = Idinput
+
+                    });
 
 
-            if (_context.SaveChanges() > 0)
+                }
+                if (Update == true)
+                {
+                    var item = _context.Requirements.SingleOrDefault(i => i.Id == Idinput);
+                    item.Naam = Naaminput;
+
+                    _context.Requirements.Update(new Requirements()
+                    {
+                        Naam = Naaminput,
+                        Lijst = "Requirements",
+                        Beschrijving = Beschrijvinginput,
+                        Duur = Duurinput,
+                        Status = Statusinput
+                    });
+                }
+
+
+                if (_context.SaveChanges() > 0)
+                {
+                    await LoadData();
+                }
+                else
+                {
+                    var error = true;
+                }
+            } catch (Exception ex)
             {
-                _context.SaveChanges();
+                var error = true;
             }
 
         }
-
-        
-
-
     }
 }
