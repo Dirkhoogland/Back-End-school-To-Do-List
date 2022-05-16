@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.32126.317
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Back-End-school-To-Do-List", "Back-End-school-To-Do-List\Back-End-school-To-Do-List.csproj", "{CB0A0EBA-889E-4C16-8E66-FB3CF45503D7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Back-End-school-To-Do-List", "Back-End-school-To-Do-List\Back-End-school-To-Do-List.csproj", "{CB0A0EBA-889E-4C16-8E66-FB3CF45503D7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

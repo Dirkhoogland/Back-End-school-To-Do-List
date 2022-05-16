@@ -15,4 +15,4 @@ Remove empty constructor
 Remove OnConfiguring
 
 
-Scaffold-DbContext "Data Source = LAPTOP-6OVEOOKP; Initial Catalog = School2; Integrated Security = True;Pooling=True;MultipleActiveResultSets=True" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models\Database -NoPluralize -Context SchoolContext
+Scaffold-DbContext "Data Source = LAPTOP-6OVEOOKP; Initial Catalog = School2; Integrated Security = True;Pooling=True;MultipleActiveResultSets=True" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models\Database -NoPluralize -Context DatabaseContext -force

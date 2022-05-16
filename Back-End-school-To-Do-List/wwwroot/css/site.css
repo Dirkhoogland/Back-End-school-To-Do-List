@@ -90,3 +90,7 @@ body {
 #InputuserUpdatetext {
     visibility: hidden;
 }
+
+#Inputlijst{
+    visibility:hidden;
+}

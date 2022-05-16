@@ -13,7 +13,7 @@ using Microsoft.EntityFrameworkCore;
 namespace Back_End_school_To_Do_List.Pages
 {
     [BindProperties(SupportsGet = true)]
-    
+
     public class IndexModel : PageModel
     {
         private readonly ILogger<IndexModel> _logger;
@@ -24,8 +24,8 @@ namespace Back_End_school_To_Do_List.Pages
             _logger = logger;
             _context = context;
         }
-        public string Naaminput  { get; set; }
-        
+        public string Naaminput { get; set; }
+
         public string Beschrijvinginput { get; set; }
 
         public int Duurinput { get; set; }
@@ -46,6 +46,8 @@ namespace Back_End_school_To_Do_List.Pages
 
         public int Idinput { get; set; }
 
+        public string Lijst { get; set; }
+        public string Lijstinput { get; set; }
         public async Task OnGet()
         {
             await LoadData();
@@ -68,53 +70,61 @@ namespace Back_End_school_To_Do_List.Pages
             BezigCount = Bezig.Count();
             KlaarCount = Klaar.Count();
         }
-
-        public async Task OnPost()
+        public void  Addlijst()
         {
 
-            try
+
+        }
+        public async Task OnPost()
+        {
+            if (Request.Form.Any(p => p.Value == "SubmitLijst"))
             {
-                if (Insert == true)
+                _context.LijstenBackend.Add(new LijstenBackend()
                 {
-                    _context.Requirements.Add(new Requirements()
-                    {
-                        Id = 0,
-                        Lijst = "Requirements",
-                        Naam = Naaminput,
-                        Beschrijving = Beschrijvinginput,
-                        Duur = Duurinput,
-                        Status = Statusinput
-
-                    });
-                }
-                if (Delete == true)
+                    Naam = Lijst
+                });
+            }
+            else
+            {
+                _context.Requirements.Add(new Requirements()
                 {
-                    _context.Requirements.Remove(new Requirements()
-                    {
+                    Id = 0,
+                    Lijst = Lijstinput,
+                    Naam = Naaminput,
+                    Beschrijving = Beschrijvinginput,
+                    Duur = Duurinput,
+                    Status = Statusinput
 
-                        Id = Idinput
+                });
+            }
+            //if (Delete == true)
+            //{
+            //    _context.Requirements.Remove(new Requirements()
+            //    {
 
-                    });
+            //        Id = Idinput
 
-
-                }
-                if (Update == true)
-                {
-                    var item = _context.Requirements.SingleOrDefault(i => i.Id == Idinput);
-                    item.Naam = Naaminput;
-
-                    _context.Requirements.Update(new Requirements()
-                    {
-                        Naam = Naaminput,
-                        Lijst = "Requirements",
-                        Beschrijving = Beschrijvinginput,
-                        Duur = Duurinput,
-                        Status = Statusinput
-                    });
-                }
+            //    });
 
 
-                if (_context.SaveChanges() > 0)
+            //}
+            //if (Update == true)
+            //{
+            //    var item = _context.Requirements.SingleOrDefault(i => i.Id == Idinput);
+            //    item.Naam = Naaminput;
+
+            //    _context.Requirements.Update(new Requirements()
+            //    {
+            //        Naam = Naaminput,
+            //        Lijst = "Requirements",
+            //        Beschrijving = Beschrijvinginput,
+            //        Duur = Duurinput,
+            //        Status = Statusinput
+            //    });
+            //}
+
+
+            if (_context.SaveChanges() > 0)
                 {
                     await LoadData();
                 }
@@ -122,10 +132,7 @@ namespace Back_End_school_To_Do_List.Pages
                 {
                     var error = true;
                 }
-            } catch (Exception ex)
-            {
-                var error = true;
-            }
+
 
         }
     }

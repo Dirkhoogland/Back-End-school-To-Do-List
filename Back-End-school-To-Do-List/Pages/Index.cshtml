@@ -8,17 +8,20 @@
 
     <div class = "Dataview">
         <button onclick = Insertshow();   id = "Insertbutton"  >Insert</button>
-        <button onclick = Deleteshow();   id = "Insertbutton"  >Delete</button>
-        <button onclick = Updateshow();   id = "Insertbutton"  >Update</button>
-        
-        @{
-
-            for (int i = 0; i < Model.BezigCount; i++  )
+        <div>
+            @using (Html.BeginForm("OnPost", "IndexModel",FormMethod.Post ))
             {
                 
-            }
-        }
+                <div id="Inputlijst">
+                <p >Lijst naam</p>
+                @Html.TextBoxFor(m => m.Lijst)
+                <p><input type="submit" value="SubmitLijst" name="Testlijst" runat = "server" id = "Insertsub"/>Add</p>
 
+                </div>
+            }
+        </div>
+@*        <button onclick = Deleteshow();   id = "Insertbutton"  >Delete</button>
+        <button onclick = Updateshow();   id = "Insertbutton"  >Update</button>*@
     </div>
 
 
@@ -26,16 +29,22 @@
     <div class = "Inputuserinsert">
 
         <div id = "Inputuserinserttext">
-            @using (Html.BeginForm("OnPost", "IndexModel", new { Insert = true }, FormMethod.Post))
+     @using (Html.BeginForm("OnPost", "IndexModel",FormMethod.Post))
     {
         <table cellpadding="0" cellspacing="0">
             <tr>
                 <th colspan="2" align="center">Planning details toevoeggen</th>
             </tr>
             <tr>
-                <td>Naam: </td>
+                <td>Taak</td>
                 <td>
                     @Html.TextBoxFor(m => m.Naaminput)
+                </td>
+            </tr>
+                <tr>
+                <td>Lijst</td>
+                <td>
+                    @Html.TextBoxFor(m => m.Lijstinput)
                 </td>
             </tr>
             <tr>
@@ -64,7 +73,47 @@
                
             </tr>
         </table>
-     <div id = "InputuserDeletetext">
+        }
+        </div>
+      </div>
+      
+</div>
+        <div class = "Bezightml">
+        @{ 
+                                <h2>Bezig</h2>
+        foreach (var item in Model.Bezig)
+        {
+                                    <p>Taak @{@item.Naam}</p>
+                                    <p>Beschrijving@{@item.Beschrijving}</p>
+                                    <p>Duur @{@item.Duur}</p>
+                                    <p>Status @{@item.Status}</p>
+                                    <button> </button>
+                                    <button> </button>
+                                    <p>-------------------</p>
+        }
+
+        }
+        </div>
+        <div class = "Klaarhtml">
+        @{
+                                    <h2>Klaar</h2>
+            foreach (var item in Model.Klaar)
+            {
+                                        <p>Naam @{@item.Naam}</p>
+                                        <p>Beschrijving@{@item.Beschrijving}</p>
+                                        <p>Duur @{@item.Duur}</p>
+                                        <p>Status @{@item.Status}</p>
+                                        <P>Id @{@item.Id}</P>  
+                                        <p>-------------------</p>
+            }
+        }
+        </div>
+
+
+
+
+
+        @*<div id = "InputuserDeletetext">
             @using (Html.BeginForm("OnPost", "IndexModel", new { Delete = true }, FormMethod.Post))
     {
         <table cellpadding="0" cellspacing="0">
@@ -80,11 +129,11 @@
             </tr>
         </table>    
     }
-      </div> 
+      </div> *@
 
          
     }
-      </div> 
+@*      </div> 
  
  <div id = "InputuserUpdatetext">
      @using (Html.BeginForm("OnPost","IndexModel", new { Update = true },FormMethod.Post))
@@ -128,44 +177,6 @@
             </tr>
         </table>    
      }
-        </div>
- </div>
-      
-</div>
-        <div class = "Bezightml">
-        @{ 
-        <h2>Bezig</h2>
-        foreach (var item in Model.Bezig)
-        {
-            <p>Naam @{@item.Naam}</p>
-            <p>Beschrijving@{@item.Beschrijving}</p>
-            <p>Duur @{@item.Duur}</p>
-            <p>Status @{@item.Status}</p>
-            <p>Id @{@item.Id;}</p>
-            <p>-------------------</p>
-        }
-
-        }
-        </div>
-        <div class = "Klaarhtml">
-        @{
-            <h2>Klaar</h2>
-            foreach (var item in Model.Klaar)
-            {
-                <p>Naam @{@item.Naam}</p>
-                <p>Beschrijving@{@item.Beschrijving}</p>
-                <p>Duur @{@item.Duur}</p>
-                <p>Status @{@item.Status}</p>
-                <P>Id @{@item.Id}</P>  
-                <p>-------------------</p>
-            }
-        }
-        </div>
-
-
-
-
-
-
+        </div>*@
 
    
