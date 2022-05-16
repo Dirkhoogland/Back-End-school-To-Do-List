@@ -79,7 +79,12 @@
       
 </div>
         <div class = "Bezightml">
-        @{ 
+        
+
+
+@*        @{ 
+
+
                                 <h2>Bezig</h2>
         foreach (var item in Model.Bezig)
         {
@@ -92,22 +97,9 @@
                                     <p>-------------------</p>
         }
 
-        }
+        }*@
         </div>
-        <div class = "Klaarhtml">
-        @{
-                                    <h2>Klaar</h2>
-            foreach (var item in Model.Klaar)
-            {
-                                        <p>Naam @{@item.Naam}</p>
-                                        <p>Beschrijving@{@item.Beschrijving}</p>
-                                        <p>Duur @{@item.Duur}</p>
-                                        <p>Status @{@item.Status}</p>
-                                        <P>Id @{@item.Id}</P>  
-                                        <p>-------------------</p>
-            }
-        }
-        </div>
+        
 
 
 

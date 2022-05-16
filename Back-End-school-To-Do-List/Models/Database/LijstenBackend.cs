@@ -5,9 +5,16 @@ using System.Collections.Generic;
 
 namespace Back_End_school_To_Do_List.Models.Database
 {
-    public partial class LijstenBackend
+    public partial class Lijstenbackend
     {
-        public int Id { get; set; }
-        public string Naam { get; set; }
+        public Lijstenbackend()
+        {
+            Requirements = new HashSet<Requirements>();
+        }
+
+        public int IdLijst { get; set; }
+        public string NaamLijst { get; set; }
+
+        public virtual ICollection<Requirements> Requirements { get; set; }
     }
 }

@@ -13,5 +13,7 @@ namespace Back_End_school_To_Do_List.Models.Database
         public string Beschrijving { get; set; }
         public int? Duur { get; set; }
         public string Status { get; set; }
+
+        public virtual Lijstenbackend LijstNavigation { get; set; }
     }
 }

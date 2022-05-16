@@ -55,33 +55,33 @@ namespace Back_End_school_To_Do_List.Pages
 
         private async Task LoadData()
         {
-            // _context.Requirements.Include(i => i.)
+            _context.Lijstenbackend.Include(m => m);
 
-            var item = await _context.Requirements.FirstOrDefaultAsync(i => i.Status == "Bezig");
-            if (item != null)
+            var lijsten = _context.Lijstenbackend.Where(m => m.IdLijst > 0).ToList();
+            _context.Requirements.Include(i => i);
+            //var taken = await _context.Requirements.Where(i => i.Id > 0).;
+            List<Requirements> Taken = new List<Requirements>();
+            foreach (var item in lijsten)
             {
+                
+                Taken.AddRange(_context.Requirements.Where(t => t.Lijst == item.NaamLijst).ToList());
             }
-
-            Bezig = await _context.Requirements.Where(i => i.Status == "Bezig").ToListAsync();
-            Klaar = await _context.Requirements.Where(i => i.Status == "Klaar").ToListAsync();
-
+            //Bezig = await _context.Requirements.Where(i => i.Status == "Bezig").ToListAsync();
+            //Klaar = await _context.Requirements.Where(i => i.Status == "Klaar").ToListAsync();
 
 
-            BezigCount = Bezig.Count();
-            KlaarCount = Klaar.Count();
+
+            //BezigCount = Bezig.Count();
+            //KlaarCount = Klaar.Count();
         }
-        public void  Addlijst()
-        {
 
-
-        }
         public async Task OnPost()
         {
             if (Request.Form.Any(p => p.Value == "SubmitLijst"))
             {
-                _context.LijstenBackend.Add(new LijstenBackend()
+                _context.Lijstenbackend.Add(new Lijstenbackend()
                 {
-                    Naam = Lijst
+                    NaamLijst = Lijst
                 });
             }
             else
@@ -96,6 +96,15 @@ namespace Back_End_school_To_Do_List.Pages
                     Status = Statusinput
 
                 });
+            }
+
+            if (_context.SaveChanges() > 0)
+            {
+                await LoadData();
+            }
+            else
+            {
+                var error = true;
             }
             //if (Delete == true)
             //{
@@ -124,14 +133,7 @@ namespace Back_End_school_To_Do_List.Pages
             //}
 
 
-            if (_context.SaveChanges() > 0)
-                {
-                    await LoadData();
-                }
-                else
-                {
-                    var error = true;
-                }
+  
 
 
         }

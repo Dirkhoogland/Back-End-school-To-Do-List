@@ -8,23 +8,31 @@ namespace Back_End_school_To_Do_List.Models.Database
 {
     public partial class SchoolContext : DbContext
     {
+
         public SchoolContext(DbContextOptions<SchoolContext> options)
             : base(options)
         {
         }
 
-        public virtual DbSet<LijstenBackend> LijstenBackend { get; set; }
+        public virtual DbSet<Lijstenbackend> Lijstenbackend { get; set; }
         public virtual DbSet<Requirements> Requirements { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasAnnotation("Relational:Collation", "Latin1_General_CI_AS");
 
-            modelBuilder.Entity<LijstenBackend>(entity =>
+            modelBuilder.Entity<Lijstenbackend>(entity =>
             {
-                entity.ToTable("Lijsten-backend");
+                entity.HasKey(e => e.IdLijst);
 
-                entity.Property(e => e.Naam)
+                entity.HasIndex(e => e.NaamLijst, "Ak_Naamlijsten")
+                    .IsUnique();
+
+                entity.Property(e => e.IdLijst).ValueGeneratedNever();
+
+                entity.Property(e => e.NaamLijst)
+                    .IsRequired()
                     .HasMaxLength(50)
                     .IsUnicode(false);
             });
@@ -47,6 +55,12 @@ namespace Back_End_school_To_Do_List.Models.Database
                 entity.Property(e => e.Status)
                     .HasMaxLength(25)
                     .IsUnicode(false);
+
+                entity.HasOne(d => d.LijstNavigation)
+                    .WithMany(p => p.Requirements)
+                    .HasPrincipalKey(p => p.NaamLijst)
+                    .HasForeignKey(d => d.Lijst)
+                    .HasConstraintName("FK_Requirements_Lijstenbackend1");
             });
 
             OnModelCreatingPartial(modelBuilder);
