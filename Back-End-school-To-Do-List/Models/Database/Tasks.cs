@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Back_End_school_To_Do_List.Models.Database
 {
-    public partial class Requirements
+    public partial class Tasks
     {
         public int Id { get; set; }
         public string Lijst { get; set; }
@@ -14,6 +14,6 @@ namespace Back_End_school_To_Do_List.Models.Database
         public int? Duur { get; set; }
         public string Status { get; set; }
 
-        public virtual Lijstenbackend LijstNavigation { get; set; }
+        public virtual Lijstentable LijstNavigation { get; set; }
     }
 }

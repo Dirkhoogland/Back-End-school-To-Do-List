@@ -31,62 +31,44 @@ namespace Back_End_school_To_Do_List.Pages
         public int Duurinput { get; set; }
 
         public string Statusinput { get; set; }
-        public int BezigCount { get; set; }
-        public int KlaarCount { get; set; }
 
-        public List<Requirements> Klaar { get; set; }
-
-        public List<Requirements> Bezig { get; set; }
-
-        public bool Insert { get; set; }
-
-        public bool Delete { get; set; }
-
-        public bool Update { get; set; }
-
-        public int Idinput { get; set; }
+        public List<Tasks> Taken { get; set; }
 
         public string Lijst { get; set; }
         public string Lijstinput { get; set; }
-        public async Task OnGet()
+        public void OnGet()
         {
-            await LoadData();
+             LoadData();
         }
 
-        private async Task LoadData()
+        private void LoadData()
         {
-            _context.Lijstenbackend.Include(m => m);
+            _context.Lijstentable.Include(m => m);
 
-            var lijsten = _context.Lijstenbackend.Where(m => m.IdLijst > 0).ToList();
-            _context.Requirements.Include(i => i);
-            //var taken = await _context.Requirements.Where(i => i.Id > 0).;
-            List<Requirements> Taken = new List<Requirements>();
+            var lijsten =  _context.Lijstentable.Where(m => m.IdLijst >= 0).ToList();
+            _context.Tasks.Include(i => i);
+            
+
+            List<Tasks> Taken = new List<Tasks>();
             foreach (var item in lijsten)
             {
                 
-                Taken.AddRange(_context.Requirements.Where(t => t.Lijst == item.NaamLijst).ToList());
+                Taken.AddRange(_context.Tasks.Where(t => t.Lijst == item.NaamLijst).ToList());
             }
-            //Bezig = await _context.Requirements.Where(i => i.Status == "Bezig").ToListAsync();
-            //Klaar = await _context.Requirements.Where(i => i.Status == "Klaar").ToListAsync();
-
-
-
-            //BezigCount = Bezig.Count();
-            //KlaarCount = Klaar.Count();
         }
 
-        public async Task OnPost()
+        public void OnPost()
         {
             if (Request.Form.Any(p => p.Value == "SubmitLijst"))
             {
-                _context.Lijstenbackend.Add(new Lijstenbackend()
+                _context.Lijstentable.Add(new Lijstentable()
                 {
                     NaamLijst = Lijst
                 });
             }
             else
             {
-                _context.Requirements.Add(new Requirements()
+                _context.Tasks.Add(new Tasks()
                 {
                     Id = 0,
                     Lijst = Lijstinput,
@@ -100,41 +82,8 @@ namespace Back_End_school_To_Do_List.Pages
 
             if (_context.SaveChanges() > 0)
             {
-                await LoadData();
+                LoadData();
             }
-            else
-            {
-                var error = true;
-            }
-            //if (Delete == true)
-            //{
-            //    _context.Requirements.Remove(new Requirements()
-            //    {
-
-            //        Id = Idinput
-
-            //    });
-
-
-            //}
-            //if (Update == true)
-            //{
-            //    var item = _context.Requirements.SingleOrDefault(i => i.Id == Idinput);
-            //    item.Naam = Naaminput;
-
-            //    _context.Requirements.Update(new Requirements()
-            //    {
-            //        Naam = Naaminput,
-            //        Lijst = "Requirements",
-            //        Beschrijving = Beschrijvinginput,
-            //        Duur = Duurinput,
-            //        Status = Statusinput
-            //    });
-            //}
-
-
-  
-
 
         }
     }
