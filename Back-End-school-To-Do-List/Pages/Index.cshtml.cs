@@ -79,12 +79,38 @@ namespace Back_End_school_To_Do_List.Pages
 
                 });
             }
-
+            _context.SaveChanges();
             if (_context.SaveChanges() > 0)
             {
                 LoadData();
             }
 
+        }
+        public IActionResult Updatetask([FromBody] List<Tasks> tasklist)
+        {
+            _context.Tasks.UpdateRange(tasklist);
+
+            _context.SaveChanges();
+            if (_context.SaveChanges() > 0)
+            {
+                
+                LoadData();
+            }
+
+            return Page();
+        }
+
+        public IActionResult Deletetask([FromBody]Tasks Id)
+        {
+            _context.Tasks.Remove(Id);
+            _context.SaveChanges();
+            if (_context.SaveChanges() > 0)
+            {
+                LoadData();
+            }
+
+
+            return Page();
         }
     }
 }

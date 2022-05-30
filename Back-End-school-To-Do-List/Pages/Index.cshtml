@@ -84,11 +84,16 @@
                             foreach (var lijst in @Model.Taken )
                             {          
                                 <p>Taak @{@lijst.Naam}</p>
+                                <input type = "text" id = "Inputupdatetnaam">
                                 <p>Beschrijving@{@lijst.Beschrijving}</p>
+                                <input type = "text" id = "Inputupdatetbesch">
                                 <p>Duur @{@lijst.Duur}</p>
+                                <input type = "text" id = "Inputupdatetduur">
                                 <p>Status @{@lijst.Status}</p>
-                                <button>Update</button>
-                                <button>Delete</button>
+                                <input type = "text" id = "Inputupdatetstatus" >
+                                <input id="updatebutton" value="Update" type = "button" onclick="updatestart()" >
+                                <input id="confirmbutton" value="confirm" type = "button" onclick="confirmupdate(@lijst.Id,Inputupdatetsnaam,Inputupdatetstatus,Inputupdatetduur,Inputupdatetbesch)" >
+                                <input id="Deletebutton" value="Delete" type = "button" onclick="startDelete(@lijst.Id)" >
                             }
                     
     }
