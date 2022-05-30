@@ -94,3 +94,15 @@ body {
 #Inputlijst{
     visibility:hidden;
 }
+#Inputupdatetnaam{
+    visibility:hidden;
+}
+#Inputupdatetbesch{
+    visibility:hidden;
+}
+#Inputupdatetduur{
+    visibility:hidden;
+}
+#Inputupdatetstatus{
+    visibility:hidden;
+}

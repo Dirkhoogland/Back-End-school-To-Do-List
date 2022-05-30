@@ -1,15 +1,15 @@
 ﻿var Insertbutton = document.getElementById("Insertbutton");
 var Inputuserinserttext = document.getElementById("Inputuserinserttext");
-var Inputlijstbutton = documument.getElementById("Insertbuttonlijst");
-var Inputlijst = documument.getElementById("Inputlijst");
-var Inputupdatetduur = getElementById("Inputupdatetduur");
-var Inputupdatetstatus = getElementById("Inputupdatetstatus");
-var Inputupdatetsnaam = getElementById("Inputupdatetnaam");
-var Inputupdatetbesch = getElementById("Inputupdatetbesch");
+var Inputlijst = document.getElementById("Inputlijst");
+var Inputupdatetduur = document.getElementById("Inputupdatetduur");
+var Inputupdatetstatus = document.getElementById("Inputupdatetstatus");
+var Inputupdatetsnaam = document.getElementById("Inputupdatetnaam");
+var Inputupdatetbesch = document.getElementById("Inputupdatetbesch");
 
 
 function Insertshow() {
     Inputuserinserttext.style.visibility = "visible"
+    Inputlijst.style.visibilisty = 'Visible'
 
 }
 function Insertlist(){
@@ -27,8 +27,11 @@ function confirmUpdate(Id, Naam, Status, Duur, Besch)
 {
     var tasklist =
     {
-        Id = Id, Naam = Naam, Status = Status, Duur = Duur, Besch = Besch
-
+        'Id': Id,
+        'Naam': Naam,
+        'Status': Status,
+        ' Duur' : Duur,
+         'Besch' : Besch
     }
     $.ajax({
         type: "Post",
@@ -52,4 +55,11 @@ function startDelete(Id)
         success: function () { console.log(Id); },
         Error: function (a, b, c) { console.log(a); console.log(b); console.log(c); }
     });
+}
+
+function updatestart() {
+    Inputupdatetnaam.style.visibility = "visible"
+    Inputupdatetbesch.style.visibility = "visible"
+    Inputupdatetstatus.style.visibility = "visible"
+    Inputupdatetduur.style.visibility = "visible"
 }

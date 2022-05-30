@@ -36,6 +36,8 @@ namespace Back_End_school_To_Do_List.Pages
 
         public string Lijst { get; set; }
         public string Lijstinput { get; set; }
+
+        public List<Lijstentable> Lijsten { get; set; }
         public void OnGet()
         {
              LoadData();
@@ -45,12 +47,12 @@ namespace Back_End_school_To_Do_List.Pages
         {
             _context.Lijstentable.Include(m => m);
 
-            var lijsten =  _context.Lijstentable.Where(m => m.IdLijst >= 0).ToList();
+            Lijsten =  _context.Lijstentable.Where(m => m.IdLijst >= 0).ToList();
             _context.Tasks.Include(i => i);
             
 
             List<Tasks> Taken = new List<Tasks>();
-            foreach (var item in lijsten)
+            foreach (var item in Lijsten)
             {
                 
                 Taken.AddRange(_context.Tasks.Where(t => t.Lijst == item.NaamLijst).ToList());
@@ -70,16 +72,16 @@ namespace Back_End_school_To_Do_List.Pages
             {
                 _context.Tasks.Add(new Tasks()
                 {
-                    Id = 0,
                     Lijst = Lijstinput,
                     Naam = Naaminput,
                     Beschrijving = Beschrijvinginput,
                     Duur = Duurinput,
                     Status = Statusinput
-
                 });
             }
+            _context.Database.ExecuteSqlRaw("SET IDENTITY_INSERT dbo.Tasks ON;");
             _context.SaveChanges();
+            _context.Database.ExecuteSqlRaw("SET IDENTITY_INSERT dbo.Tasks OFF;");
             if (_context.SaveChanges() > 0)
             {
                 LoadData();

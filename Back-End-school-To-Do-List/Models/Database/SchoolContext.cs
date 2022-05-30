@@ -39,7 +39,7 @@ namespace Back_End_school_To_Do_List.Models.Database
 
             modelBuilder.Entity<Tasks>(entity =>
             {
-                entity.Property(e => e.Id).ValueGeneratedNever();
+                entity.Property(e => e.Id);
 
                 entity.Property(e => e.Beschrijving)
                     .HasMaxLength(250)

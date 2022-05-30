@@ -7,7 +7,7 @@
 <div class="center-container">
 
     <div class = "Dataview">
-        <button onclick = Insertshow();   id = "Insertbutton"  >Insert</button>
+        <button onclick = "Insertshow()"   id = "Insertbutton"  >Insert</button>
         <div>
             @using (Html.BeginForm("OnPost", "IndexModel",FormMethod.Post ))
             {
@@ -74,36 +74,37 @@
         }
         </div>
       </div>
-      
-</div>
-    <div>
+      <div>
         
-    @{         
-            
-                
-                            foreach (var lijst in @Model.Taken )
-                            {          
-                                <p>Taak @{@lijst.Naam}</p>
-                                <input type = "text" id = "Inputupdatetnaam">
-                                <p>Beschrijving@{@lijst.Beschrijving}</p>
-                                <input type = "text" id = "Inputupdatetbesch">
-                                <p>Duur @{@lijst.Duur}</p>
-                                <input type = "text" id = "Inputupdatetduur">
-                                <p>Status @{@lijst.Status}</p>
-                                <input type = "text" id = "Inputupdatetstatus" >
-                                <input id="updatebutton" value="Update" type = "button" onclick="updatestart()" >
-                                <input id="confirmbutton" value="confirm" type = "button" onclick="confirmupdate(@lijst.Id,Inputupdatetsnaam,Inputupdatetstatus,Inputupdatetduur,Inputupdatetbesch)" >
-                                <input id="Deletebutton" value="Delete" type = "button" onclick="startDelete(@lijst.Id)" >
-                            }
-                    
-    }
+    @{
+
+        foreach(var lijst in @Model.Lijsten)
+        {  <p>Lijst naam @{@lijst.NaamLijst}</p>
+            foreach (var taak in lijst.Tasks)
+            {
+             <p>Taak @{@taak.Naam}</p>
+             <input type = "text" id = "Inputupdatetnaam">
+             <p>Beschrijving@{@taak.Beschrijving}</p>
+             <input type = "text" id = "Inputupdatetbesch">
+             <p>Duur = @{@taak.Duur}</p>
+             <input type = "text" id = "Inputupdatetduur">
+             <p>Status @{@taak.Status}</p>
+             <input type = "text" id = "Inputupdatetstatus" >
+             <input id="updatebutton" value="Update" type = "button" onclick="updatestart()" >
+             <input id="confirmbutton" value="confirm" type = "button" onclick="confirmupdate(@taak.Id,Inputupdatetsnaam,Inputupdatetstatus,Inputupdatetduur,Inputupdatetbesch)" >
+             <input id="Deletebutton" value="Delete" type = "button" onclick="startDelete(@taak.Id)" >  
+            }
+            }
+            }
+        </div>
     </div>
+    
 
 
 
 
 
-                @*<div id = "InputuserDeletetext">
+                    @*<div id = "InputuserDeletetext">
             @using (Html.BeginForm("OnPost", "IndexModel", new { Delete = true }, FormMethod.Post))
     {
         <table cellpadding="0" cellspacing="0">
@@ -123,7 +124,7 @@
 
          
     
-        @*      </div> 
+            @*      </div> 
  
  <div id = "InputuserUpdatetext">
      @using (Html.BeginForm("OnPost","IndexModel", new { Update = true },FormMethod.Post))
